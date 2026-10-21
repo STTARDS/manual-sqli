@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 8
 title: Resumen de la herramienta (Docusaurus)
 ---
 
@@ -63,8 +63,8 @@ Se concluye que Docusaurus es una herramienta adecuada para documentar práctica
 
 | Minutos | Qué decir / mostrar |
 |---------|---------------------|
-| 0–2 | Explicar qué es SQLi y el ejemplo del `' OR '1'='1`. |
-| 2–3 | Mostrar el laboratorio DVWA ya montado. |
-| 3–6 | Demostración manual (pasos 1 a 3). |
-| 6–8 | Demostración con sqlmap. |
-| 8–10 | Defensas, conclusión y mostrar este manual hecho en Docusaurus. |
+| 0–2 | Explicar qué es SQLi y el ejemplo `' OR '1'='1' -- ` (símbolo por símbolo, con la página "El payload explicado"). |
+| 2–3 | Mostrar el laboratorio DVWA ya montado en Kali Linux. |
+| 3–6 | Demostración **real** en DVWA (pasos manuales 1 a 3). |
+| 6–8 | Demostración con **sqlmap**. |
+| 8–10 | Defensas, conclusión y mostrar que todo el manual está hecho en **Docusaurus** y publicado en internet. |

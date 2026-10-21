@@ -1,0 +1,99 @@
+/* Estilos de la portada */
+
+.heroBanner {
+  padding: 5rem 0 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a0000 0%, #3d0000 50%, #0d1117 100%);
+  color: #fff;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(255, 107, 107, 0.15);
+  border: 1px solid rgba(255, 107, 107, 0.5);
+  color: #ffb3b3;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+  font-family: 'Courier New', monospace;
+  color: #fff;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  color: #d0d0d0;
+  line-height: 1.6;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.courseSection {
+  padding: 3rem 0 4rem;
+}
+
+.courseTable {
+  width: 100%;
+  display: table;
+}
+
+.courseTable td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.teamCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  background: var(--ifm-card-background-color);
+}
+
+.avatar {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b31b1b, #ff6b6b);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.carnet {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+@media screen and (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.8rem;
+  }
+  .heroBanner {
+    padding: 3rem 1rem 2.5rem;
+  }
+}

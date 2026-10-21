@@ -8,6 +8,7 @@
 const sidebars = {
   tutorialSidebar: [
     'intro',
+    'payload-explicado',
     'laboratorio',
     'practica-manual',
     'sqlmap',

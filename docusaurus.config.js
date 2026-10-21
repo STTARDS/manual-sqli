@@ -3,8 +3,9 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Manual: SQL Injection',
-  tagline: 'Práctica guiada de Ethical Hacking — UMG Salamá',
+  title: 'SQL Injection',
+  tagline: 'Práctica guiada de seguridad web · Ethical Hacking',
+  favicon: 'img/docusaurus.svg',
 
   // La URL final del sitio en GitHub Pages.
   url: 'https://sttards.github.io',
@@ -13,7 +14,7 @@ const config = {
   // Datos de tu cuenta de GitHub (necesarios para publicar).
   organizationName: 'STTARDS', // tu usuario de GitHub
   projectName: 'manual-sqli', // el nombre del repositorio
-  deploymentBranch: 'gh-pages', // rama donde se publica el sitio
+  deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
   onBrokenLinks: 'warn',
@@ -30,11 +31,10 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          // Hace que la documentación sea la página principal del sitio.
-          routeBasePath: '/',
+          // Ahora la documentación vive en /docs y la portada es una página con diseño.
+          routeBasePath: 'docs',
           sidebarPath: './sidebars.js',
         },
-        // Sin blog: es un manual, no un blog.
         blog: false,
         theme: {
           customCss: './src/css/custom.css',
@@ -47,7 +47,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Manual SQL Injection',
+        title: 'SQL Injection',
+        logo: {
+          alt: 'Logo de Docusaurus',
+          src: 'img/docusaurus.svg',
+        },
         items: [
           {
             type: 'docSidebar',
@@ -55,12 +59,42 @@ const config = {
             position: 'left',
             label: 'Práctica',
           },
+          {
+            href: 'https://github.com/STTARDS/manual-sqli',
+            label: 'GitHub',
+            position: 'right',
+          },
         ],
       },
       footer: {
         style: 'dark',
+        links: [
+          {
+            title: 'Contenido',
+            items: [
+              {label: 'Introducción', to: '/docs/intro'},
+              {label: 'El payload explicado', to: '/docs/payload-explicado'},
+              {label: 'Práctica manual', to: '/docs/practica-manual'},
+            ],
+          },
+          {
+            title: 'Herramientas',
+            items: [
+              {label: 'Kali Linux', href: 'https://www.kali.org/'},
+              {label: 'DVWA', href: 'https://github.com/digininja/DVWA'},
+              {label: 'OWASP', href: 'https://owasp.org/'},
+            ],
+          },
+          {
+            title: 'Más',
+            items: [
+              {label: 'GitHub', href: 'https://github.com/STTARDS/manual-sqli'},
+              {label: 'Docusaurus', href: 'https://docusaurus.io/'},
+            ],
+          },
+        ],
         copyright:
-          'Manual de SQL Injection — Bresler Avizaí Morales Gamez · UMG, Sede Salamá',
+          'Manual de SQL Injection · UMG, Sede Salamá · Built with Docusaurus 🦕',
       },
       prism: {
         theme: prismThemes.github,
