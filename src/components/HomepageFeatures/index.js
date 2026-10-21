@@ -21,8 +21,8 @@ const FeatureList = [
     description: (
       <>
         Práctica real en <strong>Kali Linux</strong> con DVWA y sqlmap. Paso a
-        paso, desde montar el laboratorio seguro hasta extraer datos de la base
-        de datos vulnerable.
+        paso, desde preparar DVWA hasta extraer datos de una base de datos
+        vulnerable.
       </>
     ),
   },

@@ -13,13 +13,13 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
-        <span className={styles.badge}>⚠️ Laboratorio educativo · Ethical Hacking</span>
+        <span className={styles.badge}>Seguridad web · Ethical Hacking</span>
         <Heading as="h1" className={styles.heroTitle}>
           {siteConfig.title}
         </Heading>
         <p className={styles.heroSubtitle}>
           ¿Qué es la inyección SQL, cómo funciona un ataque y cómo defenderse?
-          Una práctica guiada paso a paso con Kali Linux, DVWA y una demo en vivo.
+          Una guía paso a paso con Kali Linux, DVWA y sqlmap.
         </p>
         <div className={styles.buttons}>
           <Link className="button button--primary button--lg" to="/docs/intro">

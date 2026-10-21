@@ -1,33 +1,60 @@
 ---
-sidebar_position: 4
-title: Montar el laboratorio
+sidebar_position: 3
+title: Preparar DVWA en Kali
 ---
 
-# Montar el laboratorio seguro (Kali Linux + DVWA)
+# Preparar DVWA en Kali Linux
 
-Para practicar de forma **legal** se utiliza **DVWA (Damn Vulnerable Web Application)**, una aplicación web creada a propósito con vulnerabilidades para aprender.
+Para demostrar el ataque se usa **DVWA (Damn Vulnerable Web Application)**, una aplicación web pensada para practicar seguridad. Se instala dentro de **Kali Linux**, el sistema operativo que incluye las herramientas necesarias.
 
-## Opción recomendada: DVWA con Docker sobre Kali
+Esta sección parte de que Kali Linux ya está instalado y funcionando.
+
+## Paso 1. Instalar y arrancar DVWA con Docker
+
+Dentro de Kali, se abre la terminal y se escriben estos comandos uno por uno:
 
 ```bash
-# 1. Actualizar Kali e instalar Docker
+# Actualizar el sistema
 sudo apt update
+
+# Instalar Docker (el programa que ejecuta DVWA)
 sudo apt install -y docker.io
 
-# 2. Iniciar el servicio de Docker
+# Encender el servicio de Docker
 sudo systemctl enable docker --now
 
-# 3. Descargar y ejecutar DVWA
+# Descargar y ejecutar DVWA
 sudo docker run --rm -it -p 80:80 vulnerables/web-dvwa
 ```
 
-Luego abrir en el navegador de Kali: **http://localhost**
+El último comando deja DVWA funcionando. Esa terminal se mantiene abierta mientras dure la práctica.
 
-- **Usuario:** `admin`
-- **Contraseña:** `password`
+## Paso 2. Abrir DVWA en el navegador
 
-:::tip Primer paso dentro de DVWA
-Al entrar, dar clic en **Create / Reset Database** para iniciar la base de datos, y luego ir a **DVWA Security** y poner el nivel en **Low** (para empezar con el caso más fácil de entender).
-:::
+En el navegador de Kali se ingresa a la dirección:
 
-*(Alternativa sin Docker: en Kali también funciona `sudo apt install dvwa` y luego el comando `dvwa-start`.)*
+```
+http://localhost
+```
+
+Los datos de acceso son:
+
+- **Usuario:** admin
+- **Contraseña:** password
+
+## Paso 3. Dejar DVWA lista para el ataque
+
+1. Al entrar, se presiona el botón **Create / Reset Database** para iniciar la base de datos.
+2. Luego se va al menú **DVWA Security** y se cambia el nivel a **Low**. Este nivel no tiene protecciones, por lo que es ideal para mostrar cómo funciona el ataque desde cero.
+3. Se guarda con **Submit**.
+
+Con esto, DVWA queda preparada. El siguiente paso es realizar la inyección.
+
+## Alternativa sin Docker
+
+Kali también incluye DVWA como paquete. Si se prefiere, se puede instalar así:
+
+```bash
+sudo apt install dvwa
+dvwa-start
+```

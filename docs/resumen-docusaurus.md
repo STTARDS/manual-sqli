@@ -1,24 +1,24 @@
 ---
-sidebar_position: 8
+sidebar_position: 7
 title: Resumen de la herramienta (Docusaurus)
 ---
 
 # Resumen de la herramienta: Docusaurus
 
-Esta página cumple con la parte de la tarea que pide un **resumen de la herramienta** usada para documentar.
+Este manual fue construido con **Docusaurus**, por lo que esta sección explica qué es y por qué se eligió.
 
 ## ¿Qué es Docusaurus?
 
-Se describe **Docusaurus** como un generador de sitios de documentación de código abierto, creado por Meta (Facebook). Toma archivos escritos en **Markdown** (texto simple con formato) y los convierte automáticamente en un **sitio web** ordenado, con menú lateral, buscador y modo claro/oscuro, sin necesidad de saber diseño web.
+Docusaurus es un generador de sitios de documentación de código abierto, creado por Meta. Toma archivos escritos en **Markdown** (un formato de texto simple) y los convierte automáticamente en un sitio web ordenado, con menú lateral, buscador y modo claro/oscuro, sin necesidad de saber diseño web.
 
 ## ¿Por qué se eligió?
 
-Se identifica que, frente a otras opciones como SONAT o GitBook, Docusaurus ofrece ventajas para un estudiante:
+Frente a otras opciones como SONAT o GitBook, Docusaurus ofrece varias ventajas:
 
-- Es **gratuito** y de código abierto.
-- Usa **Markdown**, que es muy fácil de aprender.
-- Genera un sitio que se puede **mostrar en vivo** durante la exposición.
-- Permite publicarlo gratis en internet (por ejemplo con GitHub Pages).
+- Es gratuito y de código abierto.
+- Usa Markdown, que es fácil de aprender.
+- Genera un sitio que se puede mostrar en vivo y también publicar en internet de forma gratuita.
+- Separa el contenido del diseño: uno se concentra en escribir, y la presentación ya viene resuelta.
 
 ## Comandos básicos
 
@@ -36,11 +36,11 @@ npm install
 npm start
 ```
 
-Al correr `npm start`, el sitio se abre en **http://localhost:3000**.
+Al ejecutar `npm start`, el sitio se abre en `http://localhost:3000`.
 
 ## ¿Cómo se agrega contenido?
 
-Cada página del manual es un archivo `.md` dentro de la carpeta **`docs/`**. Al inicio de cada archivo se coloca un pequeño bloque llamado *front matter* que define su título y su posición en el menú:
+Cada página es un archivo `.md` dentro de la carpeta **docs/**. Al inicio de cada archivo se coloca un pequeño bloque que define su título y su posición en el menú:
 
 ```markdown
 ---
@@ -48,23 +48,11 @@ sidebar_position: 1
 title: Introducción
 ---
 
-# Mi contenido aquí
+# Contenido de la página
 ```
 
-El orden de las páginas se controla desde el archivo **`sidebars.js`**.
+El orden de las páginas se controla desde el archivo **sidebars.js**.
 
-## Resumen rápido
+## Publicación
 
-Se concluye que Docusaurus es una herramienta adecuada para documentar prácticas técnicas, porque separa el **contenido** (lo que uno escribe en Markdown) de la **presentación** (el diseño del sitio, que ya viene hecho).
-
----
-
-## 📋 Guion sugerido para la exposición (10 min)
-
-| Minutos | Qué decir / mostrar |
-|---------|---------------------|
-| 0–2 | Explicar qué es SQLi y el ejemplo `' OR '1'='1' -- ` (símbolo por símbolo, con la página "El payload explicado"). |
-| 2–3 | Mostrar el laboratorio DVWA ya montado en Kali Linux. |
-| 3–6 | Demostración **real** en DVWA (pasos manuales 1 a 3). |
-| 6–8 | Demostración con **sqlmap**. |
-| 8–10 | Defensas, conclusión y mostrar que todo el manual está hecho en **Docusaurus** y publicado en internet. |
+El sitio se publicó en internet con **GitHub Pages**, un servicio gratuito de GitHub. De esta forma, el manual queda disponible en una dirección pública que cualquier persona puede abrir desde cualquier dispositivo, sin instalar nada.

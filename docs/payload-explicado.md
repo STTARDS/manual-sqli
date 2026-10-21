@@ -1,23 +1,23 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 title: El payload explicado
 ---
 
 # ¿Qué significa `' OR '1'='1' --`?
 
-Este es **el ejemplo más famoso** de SQL Injection. Aquí se explica símbolo por símbolo, para que lo puedas contar con tus palabras en la exposición.
+Este es el ejemplo más famoso de SQL Injection. A continuación se explica símbolo por símbolo para entender por qué funciona.
 
-## Punto de partida: la consulta original
+## La consulta original
 
-La aplicación quiere comprobar el usuario y la contraseña. Por dentro arma esto:
+Para comprobar el usuario y la contraseña, la aplicación arma esta consulta:
 
 ```sql
 SELECT * FROM usuarios WHERE usuario = '____' AND clave = '____';
 ```
 
-En los espacios `____` se pega lo que escribe la persona. Si todo es normal, el usuario escribe `admin` y su clave, y la consulta queda sana.
+En los espacios `____` se coloca lo que escribe la persona. Si todo es normal, se escribe un usuario y su clave, y la consulta funciona correctamente.
 
-## ¿Qué pasa al escribir el ataque?
+## La consulta después del ataque
 
 Si en el campo **usuario** se escribe `' OR '1'='1' -- `, la consulta se convierte en:
 
@@ -25,33 +25,31 @@ Si en el campo **usuario** se escribe `' OR '1'='1' -- `, la consulta se convier
 SELECT * FROM usuarios WHERE usuario = '' OR '1'='1' -- ' AND clave = '____';
 ```
 
-Fíjate cómo cada parte del ataque cumple una función:
+Cada parte del texto cumple una función:
 
-| Símbolo | ¿Qué hace? |
-|---------|------------|
-| `'` | **Cierra** la comilla que la aplicación había abierto. Con esto el atacante "sale" del texto y empieza a escribir **órdenes SQL de verdad**. |
-| `OR` | Agrega una **segunda condición**. En SQL, `OR` significa "o se cumple una, o se cumple la otra". |
-| `'1'='1'` | Una condición que **siempre es verdadera** (1 siempre es igual a 1). Como va con `OR`, hace que **toda la consulta sea verdadera**. |
-| `-- ` | Es el símbolo de **comentario** en SQL. Todo lo que viene después se **ignora**. Así se "borra" la parte que revisaba la contraseña. |
+| Símbolo | Qué hace |
+|---------|----------|
+| `'` | Cierra la comilla que la aplicación había abierto. Con esto el atacante sale del texto normal y empieza a escribir órdenes SQL reales. |
+| `OR` | Agrega una segunda condición. En SQL, `OR` significa que basta con que se cumpla una de las dos para que el resultado sea verdadero. |
+| `'1'='1'` | Una condición que siempre es verdadera, porque 1 siempre es igual a 1. Al ir unida con `OR`, vuelve verdadera toda la consulta. |
+| `-- ` | Es el símbolo de comentario en SQL. Todo lo que viene después se ignora, así que la comprobación de la contraseña desaparece. |
 
 ## El resultado
 
-La condición completa queda como:
+La condición completa termina diciendo:
 
-> "Dame los usuarios donde el nombre sea vacío **O donde 1 sea igual a 1**"
+> "Dame los usuarios donde el nombre esté vacío **o donde 1 sea igual a 1**."
 
-Como `1 = 1` **siempre** se cumple, la base de datos responde con usuarios válidos, y **la comprobación de la contraseña desapareció** por el comentario `--`. Resultado: se entra **sin saber la contraseña**. 🔓
+Como 1 siempre es igual a 1, la base de datos responde con usuarios válidos, y la parte que revisaba la contraseña quedó anulada por el comentario `--`. El resultado es que se obtiene acceso sin conocer la contraseña.
 
-:::tip Frase para la exposición
-"El truco está en que la comilla rompe la consulta, el `OR '1'='1'` la vuelve siempre verdadera, y los dos guiones `--` borran la parte de la contraseña."
-:::
+## Otras variantes
 
-## Otras variantes que verás
+Existen muchas formas de lograr lo mismo:
 
 ```sql
-admin' --            → entra directamente como el usuario "admin"
-' OR 1=1 #           → igual que el clásico, pero con # como comentario (MySQL)
-' OR 'a'='a          → cualquier condición siempre verdadera sirve
+admin' --            Entra directamente como el usuario "admin".
+' OR 1=1 #           Igual que el clásico, usando # como comentario (MySQL).
+' OR 'a'='a          Cualquier condición siempre verdadera también sirve.
 ```
 
-👉 Todas estas se prueban de verdad en la **[Práctica manual](./practica-manual.md)** dentro de DVWA.
+Todas estas se ponen a prueba en la sección **Práctica paso a paso**.

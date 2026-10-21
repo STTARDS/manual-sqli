@@ -5,41 +5,46 @@ title: Introducción
 
 # ¿Qué es SQL Injection?
 
-> **Curso:** Ingeniería en Sistemas · Ethical Hacking / Seguridad
-> **Herramientas:** Kali Linux · DVWA · sqlmap
-> **Valor:** 5 pts. · **Tiempo de exposición:** 10 minutos
+SQL Injection (inyección SQL) es una de las vulnerabilidades más conocidas en las páginas web. Permite que un atacante introduzca sus propias órdenes dentro de las consultas que una aplicación le hace a su base de datos, y de esa forma lea, modifique o robe información que no debería estar a su alcance.
 
-:::warning Aviso ético y legal (leer antes de empezar)
-Todo lo que se muestra aquí se hace **únicamente sobre un laboratorio propio y de prueba** (una aplicación hecha a propósito con fallos para aprender). Se recomienda **nunca** aplicar estas técnicas sobre sitios o sistemas reales sin autorización escrita del dueño, ya que en Guatemala y en la mayoría de países esto constituye un delito. El objetivo es **entender cómo funciona el ataque para poder defenderse de él**.
-:::
+## Cómo funciona, con un ejemplo cotidiano
 
-## La idea en una frase
+Una página web guarda su información (usuarios, contraseñas, productos, etc.) en una **base de datos**. Para consultarla usa un lenguaje llamado **SQL**.
 
-Se define **SQL Injection (SQLi)** como una vulnerabilidad que permite a un atacante **"colar" sus propias órdenes SQL** dentro de las consultas que una aplicación le hace a su base de datos.
-
-## ¿Por qué ocurre? (explicado fácil)
-
-Imagina un formulario de inicio de sesión. Por dentro, la aplicación arma una pregunta a la base de datos más o menos así:
+Cuando una persona inicia sesión, la página arma una consulta parecida a esta:
 
 ```sql
-SELECT * FROM usuarios WHERE usuario = 'LO_QUE_ESCRIBE_EL_USUARIO' AND clave = 'LA_CLAVE';
+SELECT * FROM usuarios WHERE usuario = 'lo_que_escribio' AND clave = 'su_clave';
 ```
 
-El problema aparece cuando la aplicación **pega directamente** lo que escribe el usuario, sin revisarlo. Si en lugar de un nombre normal el atacante escribe símbolos de SQL, esos símbolos **se mezclan con la orden** y cambian su significado.
+El riesgo aparece cuando la página **pega directamente** lo que escribió la persona dentro de la consulta, sin revisarlo. Si alguien, en lugar de un nombre normal, escribe símbolos propios de SQL, esos símbolos se mezclan con la orden y cambian su significado.
 
-Es como si en una carta alguien pudiera escribir texto que el cartero confunde con instrucciones: en vez de leerse como "el usuario se llama X", la base de datos termina obedeciendo una orden nueva.
+Dicho de otra forma: el atacante logra que la página le pregunte **otra cosa** a la base de datos. Por ejemplo, en vez de preguntar "¿existe este usuario con esta contraseña?", termina preguntando "¿existe cualquier usuario?", lo que le permite entrar sin conocer la contraseña.
 
-## Los tipos principales
+## Un vistazo al ataque más común
 
-| Tipo | En palabras sencillas |
-|------|------------------------|
-| **In-band (clásica)** | El resultado del ataque se ve directo en la pantalla (la más fácil de entender). |
-| **Blind (a ciegas)** | La página no muestra el dato, pero el atacante lo adivina viendo cómo se comporta (si responde "sí/no" o si tarda más). |
-| **Out-of-band** | Usa canales alternos (peticiones de red). Es la menos común. |
+El ejemplo clásico es escribir esto en el campo de usuario:
 
-## ¿Qué sigue en este manual?
+```
+' OR '1'='1' -- 
+```
 
-1. **[El payload explicado](./payload-explicado.md)** → qué significa cada símbolo de `' OR '1'='1' --`.
-2. **[Montar el laboratorio](./laboratorio.md)** → Kali Linux + DVWA.
-3. **[Práctica manual](./practica-manual.md)** y **[sqlmap](./sqlmap.md)** → la demostración real del ataque.
-4. **[Defensas](./defensas.md)** → cómo se previene (lo más importante).
+Con eso, la consulta se vuelve siempre verdadera y la página concede el acceso aunque la contraseña sea incorrecta. En la sección **El payload explicado** se analiza qué hace cada símbolo.
+
+## Tipos de inyección SQL
+
+Existen tres formas principales:
+
+| Tipo | En qué consiste |
+|------|-----------------|
+| **In-band (clásica)** | El resultado del ataque se ve directamente en la pantalla. Es la más sencilla de entender. |
+| **Blind (a ciegas)** | La página no muestra el dato, pero el atacante lo deduce observando cómo responde (por ejemplo, si tarda más o si cambia su comportamiento). |
+| **Out-of-band** | El atacante recibe la información por canales distintos, como peticiones de red. Es la menos frecuente. |
+
+## Por qué es importante
+
+SQL Injection está dentro del **OWASP Top 10**, la lista de los riesgos de seguridad web más críticos a nivel mundial. A pesar de ser muy conocida, sigue siendo común porque nace de un error sencillo: confiar en los datos que escribe el usuario. Entenderla es el primer paso para poder prevenirla.
+
+## Importante antes de practicar
+
+Todas las pruebas de este manual se realizan sobre **DVWA (Damn Vulnerable Web Application)**, una aplicación creada a propósito para practicar seguridad. Estas técnicas no deben aplicarse nunca sobre páginas o sistemas reales sin autorización, ya que eso constituye un delito.
