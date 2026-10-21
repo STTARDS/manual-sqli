@@ -1,0 +1,28 @@
+/**
+ * Colores del manual. Docusaurus usa estas variables para todo el tema.
+ * Puedes cambiar los valores para personalizar el sitio.
+ */
+
+:root {
+  --ifm-color-primary: #b31b1b;
+  --ifm-color-primary-dark: #a11818;
+  --ifm-color-primary-darker: #981717;
+  --ifm-color-primary-darkest: #7d1313;
+  --ifm-color-primary-light: #c51e1e;
+  --ifm-color-primary-lighter: #ce1f1f;
+  --ifm-color-primary-lightest: #e23030;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* Colores para el modo oscuro */
+[data-theme='dark'] {
+  --ifm-color-primary: #ff6b6b;
+  --ifm-color-primary-dark: #ff4c4c;
+  --ifm-color-primary-darker: #ff3d3d;
+  --ifm-color-primary-darkest: #ff1010;
+  --ifm-color-primary-light: #ff8a8a;
+  --ifm-color-primary-lighter: #ff9999;
+  --ifm-color-primary-lightest: #ffc7c7;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
