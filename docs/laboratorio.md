@@ -1,9 +1,9 @@
 ---
 sidebar_position: 3
-title: Preparar DVWA en Kali
+title: "Módulo 3: Preparar DVWA en Kali"
 ---
 
-# Preparar DVWA en Kali Linux
+# Módulo 3 · Preparar DVWA en Kali Linux
 
 Para demostrar el ataque se usa **DVWA (Damn Vulnerable Web Application)**, una aplicación web pensada para practicar seguridad. Se instala dentro de **Kali Linux**, el sistema operativo que incluye las herramientas necesarias.
 

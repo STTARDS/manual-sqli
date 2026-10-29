@@ -1,28 +1,79 @@
 /**
- * Colores del manual. Docusaurus usa estas variables para todo el tema.
- * Puedes cambiar los valores para personalizar el sitio.
+ * Estilo retro de terminal (verde fósforo sobre negro), limpio y legible.
+ * El sitio arranca siempre en modo oscuro.
  */
 
 :root {
-  --ifm-color-primary: #b31b1b;
-  --ifm-color-primary-dark: #a11818;
-  --ifm-color-primary-darker: #981717;
-  --ifm-color-primary-darkest: #7d1313;
-  --ifm-color-primary-light: #c51e1e;
-  --ifm-color-primary-lighter: #ce1f1f;
-  --ifm-color-primary-lightest: #e23030;
+  /* Modo claro (secundario) */
+  --ifm-color-primary: #15803d;
+  --ifm-color-primary-dark: #14732f;
+  --ifm-color-primary-darker: #136c2c;
+  --ifm-color-primary-darkest: #0f5823;
+  --ifm-color-primary-light: #1b9247;
+  --ifm-color-primary-lighter: #1d9a4b;
+  --ifm-color-primary-lightest: #24b85a;
   --ifm-code-font-size: 95%;
+  --ifm-font-family-monospace: 'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* Colores para el modo oscuro */
+/* Modo oscuro (el principal) */
 [data-theme='dark'] {
-  --ifm-color-primary: #ff6b6b;
-  --ifm-color-primary-dark: #ff4c4c;
-  --ifm-color-primary-darker: #ff3d3d;
-  --ifm-color-primary-darkest: #ff1010;
-  --ifm-color-primary-light: #ff8a8a;
-  --ifm-color-primary-lighter: #ff9999;
-  --ifm-color-primary-lightest: #ffc7c7;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #4ade80;
+  --ifm-color-primary-dark: #2ed66a;
+  --ifm-color-primary-darker: #22c55e;
+  --ifm-color-primary-darkest: #16a34a;
+  --ifm-color-primary-light: #6ee79a;
+  --ifm-color-primary-lighter: #86edaa;
+  --ifm-color-primary-lightest: #b4f5cb;
+
+  --ifm-background-color: #080b09;
+  --ifm-background-surface-color: #0e1310;
+  --ifm-navbar-background-color: #0a0e0b;
+  --ifm-footer-background-color: #060806;
+  --ifm-card-background-color: #0e1310;
+  --ifm-font-color-base: #d6e6d6;
+  --ifm-heading-color: #e7ffe7;
+
+  --docusaurus-highlighted-code-line-bg: rgba(74, 222, 128, 0.12);
+}
+
+/* Tipografía monoespaciada en títulos y barra: toque retro de terminal */
+h1,
+h2,
+h3,
+.navbar__title,
+.menu__link {
+  font-family: var(--ifm-font-family-monospace);
+  letter-spacing: -0.3px;
+}
+
+/* Un pequeño "prompt" verde antes de los títulos de sección */
+.markdown h2::before {
+  content: '> ';
+  color: var(--ifm-color-primary);
+}
+
+/* Barra superior con una línea verde sutil abajo */
+[data-theme='dark'] .navbar {
+  border-bottom: 1px solid rgba(74, 222, 128, 0.25);
+}
+
+/* Bloques de código con borde verde tenue en modo oscuro */
+[data-theme='dark'] pre,
+[data-theme='dark'] .theme-code-block {
+  border: 1px solid rgba(74, 222, 128, 0.22);
+  border-radius: 10px;
+}
+
+/* Código en línea con fondo oscuro y texto verde */
+[data-theme='dark'] code {
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.18);
+  color: #9af7b8;
+}
+
+/* Tablas con un aire más técnico */
+[data-theme='dark'] table thead {
+  background: rgba(74, 222, 128, 0.06);
 }

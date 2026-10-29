@@ -1,9 +1,9 @@
 ---
 sidebar_position: 1
-title: Introducción
+title: "Módulo 1: Introducción"
 ---
 
-# ¿Qué es SQL Injection?
+# Módulo 1 · ¿Qué es SQL Injection?
 
 SQL Injection (inyección SQL) es una de las vulnerabilidades más conocidas en las páginas web. Permite que un atacante introduzca sus propias órdenes dentro de las consultas que una aplicación le hace a su base de datos, y de esa forma lea, modifique o robe información que no debería estar a su alcance.
 
@@ -48,3 +48,14 @@ SQL Injection está dentro del **OWASP Top 10**, la lista de los riesgos de segu
 ## Importante antes de practicar
 
 Todas las pruebas de este manual se realizan sobre **DVWA (Damn Vulnerable Web Application)**, una aplicación creada a propósito para practicar seguridad. Estas técnicas no deben aplicarse nunca sobre páginas o sistemas reales sin autorización, ya que eso constituye un delito.
+
+## Recorrido del manual
+
+El manual incluye tres prácticas, de la más simple a la más avanzada:
+
+- **Módulo 2 · El payload explicado** → qué significa `' OR '1'='1' --`.
+- **Módulo 3 · Preparar DVWA en Kali** → dejar el entorno listo.
+- **Práctica 1 · Inyección manual** → el ataque escribiendo las consultas a mano.
+- **Práctica 2 · sqlmap** → el ataque automático que roba y descifra la base de datos.
+- **Práctica 3 · John the Ripper** → romper los hash para revelar las contraseñas reales.
+- **Cómo prevenirlo** → código vulnerable vs. código seguro (antes y después).

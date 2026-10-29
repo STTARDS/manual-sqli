@@ -1,30 +1,98 @@
 ---
-sidebar_position: 6
-title: Defensas y conclusión
+sidebar_position: 7
+title: "Cómo prevenirlo (código seguro)"
 ---
 
-# ¿Cómo se previene?
+# Cómo prevenirlo: código vulnerable vs. código seguro
 
-La buena noticia es que SQL Injection, aunque es peligrosa, se puede prevenir. Estas son las defensas, de la más importante a las complementarias:
+La buena noticia es que SQL Injection, aunque es peligrosa, **se previene con facilidad** si se programa con cuidado. Aquí se compara el código mal hecho (vulnerable) con el código corregido (seguro), para ver exactamente qué cambia.
 
-1. **Consultas parametrizadas (prepared statements).** Separan el código SQL de los datos que escribe el usuario, de modo que el texto nunca pueda transformarse en una orden. Es la defensa principal.
-2. **Validación de datos.** Revisar y limpiar todo lo que escribe el usuario antes de usarlo.
-3. **Mínimo privilegio.** Que el usuario de la base de datos solo pueda hacer lo estrictamente necesario, para limitar el daño si algo falla.
-4. **Uso de un ORM.** Una herramienta que arma las consultas de forma segura por defecto.
-5. **Firewall de aplicaciones web (WAF).** Una capa extra que filtra ataques conocidos.
-6. **No mostrar errores detallados** de SQL al usuario final, porque dan pistas al atacante.
+## Ejemplo 1: la consulta de usuario (como en DVWA)
 
-## Ejemplo de consulta segura
+### ❌ Antes (código vulnerable)
 
-Así se vería un inicio de sesión bien hecho en PHP, usando consultas parametrizadas:
+El error es **pegar directamente** lo que escribe el usuario dentro de la consulta:
 
 ```php
-$stmt = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = ? AND clave = ?");
-$stmt->execute([$usuario, $clave]);
+// PHP vulnerable
+$id = $_GET['id'];
+$sql = "SELECT first_name, last_name FROM users WHERE user_id = '$id'";
+$resultado = mysqli_query($conexion, $sql);
 ```
 
-Aquí los datos del usuario nunca se mezclan con el código. Aunque alguien escriba `' OR '1'='1`, el sistema lo trata como texto común y no como una orden, así que el ataque no funciona.
+Si el usuario escribe `1' OR '1'='1`, la consulta se convierte en algo siempre verdadero y devuelve toda la tabla.
+
+### ✅ Después (código seguro)
+
+Se usan **consultas parametrizadas** (*prepared statements*): el dato y el código SQL van por separado, así el texto del usuario nunca se interpreta como una orden.
+
+```php
+// PHP seguro (con PDO)
+$id = $_GET['id'];
+$stmt = $pdo->prepare("SELECT first_name, last_name FROM users WHERE user_id = ?");
+$stmt->execute([$id]);
+$resultado = $stmt->fetchAll();
+```
+
+El `?` es un hueco que la base de datos rellena tratando `$id` **siempre como texto**. Aunque el usuario escriba `1' OR '1'='1`, se busca un usuario que se llame literalmente "1' OR '1'='1", no se ejecuta como código.
+
+## Ejemplo 2: un login (cómo se vulnera y cómo se arregla)
+
+### ❌ Antes (login vulnerable)
+
+```php
+// PHP vulnerable
+$usuario = $_POST['usuario'];
+$clave   = $_POST['clave'];
+$sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND clave = '$clave'";
+$resultado = mysqli_query($conexion, $sql);
+
+if (mysqli_num_rows($resultado) > 0) {
+    echo "¡Bienvenido!";   // acceso concedido
+}
+```
+
+**Cómo se vulnera:** en el campo usuario se escribe:
+
+```
+' OR '1'='1' -- 
+```
+
+La consulta queda:
+
+```sql
+SELECT * FROM usuarios WHERE usuario = '' OR '1'='1' -- ' AND clave = '...'
+```
+
+La condición es siempre verdadera y el `--` anula la revisión de la contraseña. **Se entra sin saber la contraseña.**
+
+### ✅ Después (login seguro)
+
+```php
+// PHP seguro (con PDO)
+$usuario = $_POST['usuario'];
+$clave   = $_POST['clave'];
+$stmt = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = ? AND clave = ?");
+$stmt->execute([$usuario, $clave]);
+
+if ($stmt->rowCount() > 0) {
+    echo "¡Bienvenido!";
+}
+```
+
+Ahora, aunque se escriba `' OR '1'='1' -- `, se busca un usuario cuyo nombre sea exactamente ese texto. Como no existe, **el acceso se niega**. El ataque deja de funcionar.
+
+> Nota adicional: las contraseñas nunca deberían guardarse en MD5 ni en texto plano, sino con funciones diseñadas para eso como `password_hash()` de PHP (bcrypt), que resisten a herramientas como John the Ripper.
+
+## Otras defensas importantes
+
+Además de las consultas parametrizadas (la defensa principal), se recomiendan:
+
+1. **Validar los datos** que escribe el usuario antes de usarlos.
+2. **Mínimo privilegio**: que el usuario de la base de datos solo pueda hacer lo necesario.
+3. **No mostrar errores de SQL** al usuario final (dan pistas al atacante).
+4. Usar un **ORM** o un **WAF** como capas extra de protección.
 
 ## Conclusión
 
-SQL Injection sigue siendo una de las vulnerabilidades más críticas y, al mismo tiempo, una de las más prevenibles. El problema de fondo no está en la base de datos, sino en la forma en que la aplicación construye sus consultas. Programando con cuidado y usando consultas parametrizadas, este ataque deja de ser una amenaza.
+SQL Injection sigue siendo una de las vulnerabilidades más críticas y, a la vez, una de las más prevenibles. El problema de fondo no está en la base de datos, sino en **la forma en que la aplicación construye sus consultas**. Con consultas parametrizadas, el ataque que se vio en las tres prácticas **deja de ser posible**.

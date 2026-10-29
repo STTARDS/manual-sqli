@@ -1,9 +1,9 @@
 ---
 sidebar_position: 2
-title: El payload explicado
+title: "Módulo 2: El payload explicado"
 ---
 
-# ¿Qué significa `' OR '1'='1' --`?
+# Módulo 2 · ¿Qué significa `' OR '1'='1' --`?
 
 Este es el ejemplo más famoso de SQL Injection. A continuación se explica símbolo por símbolo para entender por qué funciona.
 

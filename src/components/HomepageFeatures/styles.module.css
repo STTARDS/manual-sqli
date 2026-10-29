@@ -8,8 +8,8 @@
 .card {
   height: 100%;
   padding: 2rem 1.5rem;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 16px;
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 12px;
   background: var(--ifm-card-background-color);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
@@ -17,7 +17,7 @@
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(179, 27, 27, 0.15);
+  box-shadow: 0 10px 30px rgba(74, 222, 128, 0.15);
 }
 
 .icon {
