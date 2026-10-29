@@ -13,6 +13,7 @@ const sidebars = {
     'practica-manual',
     'sqlmap',
     'john',
+    'practica-login',
     'defensas',
   ],
 };

@@ -58,4 +58,5 @@ El manual incluye tres prácticas, de la más simple a la más avanzada:
 - **Práctica 1 · Inyección manual** → el ataque escribiendo las consultas a mano.
 - **Práctica 2 · sqlmap** → el ataque automático que roba y descifra la base de datos.
 - **Práctica 3 · John the Ripper** → romper los hash para revelar las contraseñas reales.
+- **Práctica 4 · Vulnerar un login** → saltarse el login de una app propia y entrar a su panel privado.
 - **Cómo prevenirlo** → código vulnerable vs. código seguro (antes y después).
