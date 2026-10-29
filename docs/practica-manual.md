@@ -7,9 +7,7 @@ title: "Práctica 1: Inyección manual"
 
 Con DVWA preparada, se entra a la sección **SQL Injection** del menú. Aparece un campo que pide un **User ID**. Ahí se harán las pruebas, de la más simple a la más avanzada.
 
-:::tip Consejo para que nunca falle
-Conviene **copiar y pegar** cada comando en el campo "User ID" en lugar de escribirlo a mano. Un espacio o una comilla de más hacen que falle. Todos los comandos de abajo están en su versión más confiable.
-:::
+> **Consejo:** conviene **copiar y pegar** cada comando en el campo "User ID" en lugar de escribirlo a mano. Un espacio o una comilla de más hacen que falle. Todos los comandos de abajo están en su versión más confiable.
 
 ## Paso 1. Comprobar que el campo es vulnerable
 
@@ -51,9 +49,7 @@ Finalmente se extraen los usuarios y contraseñas guardados en la tabla de ejemp
 
 Las contraseñas aparecen convertidas en **hash MD5**, no en texto plano. Esto sirve para explicar que, aunque las contraseñas estén cifradas, el atacante igual puede verlas si la aplicación es vulnerable, y que por eso el cifrado no sustituye a una buena programación.
 
-:::note Sobre el `-- -` del final
-El `-- -` (guion, guion, espacio, guion) es un comentario de SQL que anula el resto de la consulta. Se usa `-- -` en lugar de solo `-- ` porque el navegador borra los espacios del final, y sin ese guion extra el comentario no funcionaría.
-:::
+> **Sobre el `-- -` del final:** es un comentario de SQL que anula el resto de la consulta. Se usa `-- -` (guion, guion, espacio, guion) en lugar de solo `-- ` porque el navegador borra los espacios del final, y sin ese guion extra el comentario no funcionaría.
 
 ## Resumen de la práctica
 

@@ -9,7 +9,7 @@ La buena noticia es que SQL Injection, aunque es peligrosa, **se previene con fa
 
 ## Ejemplo 1: la consulta de usuario (como en DVWA)
 
-### ❌ Antes (código vulnerable)
+### Antes (código vulnerable)
 
 El error es **pegar directamente** lo que escribe el usuario dentro de la consulta:
 
@@ -22,7 +22,7 @@ $resultado = mysqli_query($conexion, $sql);
 
 Si el usuario escribe `1' OR '1'='1`, la consulta se convierte en algo siempre verdadero y devuelve toda la tabla.
 
-### ✅ Después (código seguro)
+### Después (código seguro)
 
 Se usan **consultas parametrizadas** (*prepared statements*): el dato y el código SQL van por separado, así el texto del usuario nunca se interpreta como una orden.
 
@@ -38,7 +38,7 @@ El `?` es un hueco que la base de datos rellena tratando `$id` **siempre como te
 
 ## Ejemplo 2: un login (cómo se vulnera y cómo se arregla)
 
-### ❌ Antes (login vulnerable)
+### Antes (login vulnerable)
 
 ```php
 // PHP vulnerable
@@ -66,7 +66,7 @@ SELECT * FROM usuarios WHERE usuario = '' OR '1'='1' -- ' AND clave = '...'
 
 La condición es siempre verdadera y el `--` anula la revisión de la contraseña. **Se entra sin saber la contraseña.**
 
-### ✅ Después (login seguro)
+### Después (login seguro)
 
 ```php
 // PHP seguro (con PDO)

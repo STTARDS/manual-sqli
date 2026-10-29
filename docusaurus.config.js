@@ -100,7 +100,7 @@ const config = {
           },
         ],
         copyright:
-          'Manual de SQL Injection · UMG, Sede Salamá · Built with Docusaurus 🦕',
+          'Manual de SQL Injection · UMG, Sede Salamá · Built with Docusaurus',
       },
       prism: {
         theme: prismThemes.github,

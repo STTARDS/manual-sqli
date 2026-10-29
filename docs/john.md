@@ -52,11 +52,11 @@ john --show --format=raw-md5 hashes.txt
 
 Muestra el hash junto a la **contraseña real**. El resultado deja claro el mensaje final: las contraseñas estaban "cifradas", pero por ser débiles se rompen al instante.
 
-:::note Las contraseñas de DVWA
+**Las contraseñas reales de DVWA**, para comprobar el resultado:
+
 | Hash | Contraseña real |
 |------|-----------------|
 | `5f4dcc3b5aa765d61d8327deb882cf99` | password |
 | `e99a18c428cb38d5f260853678922e03` | abc123 |
 | `8d3533d75ae2c3966d7e0d4fcc69216b` | charley |
 | `0d107d09f5bbe40cade3de5c71e9e9b7` | letmein |
-:::

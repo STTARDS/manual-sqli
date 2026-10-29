@@ -7,6 +7,8 @@ title: "Práctica 2: Ataque automático (sqlmap)"
 
 **sqlmap** es la herramienta estrella de Kali Linux para SQL Injection. Con **un solo comando** detecta la vulnerabilidad, roba la base de datos completa y hasta **descifra las contraseñas** automáticamente. Es la demostración más impactante: la pantalla trabaja sola y en segundos aparecen los usuarios con sus contraseñas reales.
 
+El ataque se lanza contra **la misma DVWA que corre en esta computadora** (`http://localhost`). "localhost" significa "este mismo equipo", así que no se ataca ninguna página de internet ni ajena: es el mismo laboratorio de práctica de los pasos anteriores, solo que ahora el ataque es automático.
+
 ## Paso 1. Obtener la cookie de sesión
 
 sqlmap necesita entrar a DVWA como si fuera el usuario, así que se le entrega la **cookie de sesión**. En Firefox, estando dentro de DVWA:
@@ -44,9 +46,7 @@ sqlmap confirma la vulnerabilidad, descarga la tabla completa y, al final, pregu
 - su **hash MD5**,
 - y su **contraseña real ya descifrada** (por ejemplo: `admin → password`, `gordonb → abc123`).
 
-:::tip Por qué impresiona
-Lo que una persona haría escribiendo consulta por consulta, sqlmap lo logra en segundos, de forma ordenada y hasta rompiendo el cifrado. Deja claro lo peligrosa que es esta vulnerabilidad en un sistema real.
-:::
+> **Por qué impresiona:** lo que una persona haría escribiendo consulta por consulta, sqlmap lo logra en segundos, de forma ordenada y hasta rompiendo el cifrado. Deja claro lo peligrosa que es esta vulnerabilidad en un sistema real.
 
 ## Comandos extra (opcionales)
 

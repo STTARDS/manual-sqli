@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 // Las tres tarjetas que resumen la práctica.
 const FeatureList = [
   {
-    icon: '🔎',
+    icon: '01',
     title: '¿Qué es SQL Injection?',
     description: (
       <>
@@ -16,7 +16,7 @@ const FeatureList = [
     ),
   },
   {
-    icon: '🛠️',
+    icon: '02',
     title: '¿Cómo se explota?',
     description: (
       <>
@@ -27,7 +27,7 @@ const FeatureList = [
     ),
   },
   {
-    icon: '🛡️',
+    icon: '03',
     title: '¿Cómo se previene?',
     description: (
       <>

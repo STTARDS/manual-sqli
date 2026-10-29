@@ -7,6 +7,16 @@ title: "Módulo 2: El payload explicado"
 
 Este es el ejemplo más famoso de SQL Injection. A continuación se explica símbolo por símbolo para entender por qué funciona.
 
+## La idea en palabras sencillas
+
+Conviene imaginar el campo donde se escribe (por ejemplo "User ID") como una **ventanilla** donde se pide un expediente por su número.
+
+- Si se escribe **`1`**, la base de datos entiende: "dame el expediente número 1", y devuelve **solo ese**.
+- Si se escribe **`1' OR '1'='1`**, se le mete una trampa. Ahora entiende: "dame el expediente 1, **o cualquiera donde 1 sea igual a 1**".
+- Como **1 siempre es igual a 1** (eso nunca deja de ser cierto), la condición se cumple para **todos** los registros. Por eso la base de datos entrega **todos los usuarios**, no solo el número 1.
+
+La comilla `'` es la pieza clave: "rompe" la pregunta original y permite al atacante meter su propia condición. A continuación se ve el detalle técnico.
+
 ## La consulta original
 
 Para comprobar el usuario y la contraseña, la aplicación arma esta consulta:
