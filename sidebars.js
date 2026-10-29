@@ -15,6 +15,7 @@ const sidebars = {
     'john',
     'practica-login',
     'defensas',
+    'preguntas',
   ],
 };
 

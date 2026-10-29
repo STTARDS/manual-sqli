@@ -52,6 +52,17 @@ if (mysqli_num_rows($resultado) > 0) {
 }
 ```
 
+**Qué hace cada línea:**
+
+| Línea | Qué hace |
+|-------|----------|
+| `$usuario = $_POST['usuario'];` | Toma el usuario que la persona escribió en el formulario. |
+| `$clave = $_POST['clave'];` | Toma la contraseña escrita en el formulario. |
+| `$sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND clave = '$clave'";` | Arma la consulta **pegando directamente** esos valores dentro del texto. **Aquí está el fallo**: el dato del usuario se mezcla con el código SQL. |
+| `$resultado = mysqli_query($conexion, $sql);` | Envía esa consulta a la base de datos y guarda lo que responde. |
+| `if (mysqli_num_rows($resultado) > 0) {` | Pregunta: ¿la consulta devolvió al menos una fila? (es decir, ¿encontró un usuario que coincida?). |
+| `echo "¡Bienvenido!";` | Si hubo coincidencia, concede el acceso. |
+
 **Cómo se vulnera:** en el campo usuario se escribe:
 
 ```
@@ -79,6 +90,15 @@ if ($stmt->rowCount() > 0) {
     echo "¡Bienvenido!";
 }
 ```
+
+**Qué hace cada línea:**
+
+| Línea | Qué hace |
+|-------|----------|
+| `$stmt = $pdo->prepare("... usuario = ? AND clave = ?");` | Prepara la consulta con **huecos** (`?`) en lugar de pegar los datos. El código SQL queda fijo y separado de los datos. |
+| `$stmt->execute([$usuario, $clave]);` | Rellena los huecos con los datos, tratándolos **siempre como texto**, nunca como código. |
+| `if ($stmt->rowCount() > 0) {` | Pregunta si hubo una coincidencia real. |
+| `echo "¡Bienvenido!";` | Concede el acceso solo si de verdad coincide. |
 
 Ahora, aunque se escriba `' OR '1'='1' -- `, se busca un usuario cuyo nombre sea exactamente ese texto. Como no existe, **el acceso se niega**. El ataque deja de funcionar.
 
